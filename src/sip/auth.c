@@ -263,6 +263,7 @@ int sip_auth_encode(struct mbuf *mb, struct sip_auth *auth, const char *met,
 					   realm->opaque);
 
 		if (realm->qop) {
+			err |= mbuf_printf(mb, ", algorithm=MD5");
 			err |= mbuf_printf(mb, ", cnonce=\"%016llx\"", cnonce);
 			err |= mbuf_write_str(mb, ", qop=auth");
 			err |= mbuf_printf(mb, ", nc=%08x", realm->nc);
